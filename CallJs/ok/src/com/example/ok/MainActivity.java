@@ -97,5 +97,22 @@ public class MainActivity extends Activity {
                     break;
             }
         }
+
+
+        @JavascriptInterface
+        public void startActivty(int i) {
+            if (i == 0) {
+                Intent intent = new Intent(MainActivity.this, LocalBrowserActivity.class);
+                startActivity(intent);
+            } else   if (i == 1) {
+                Intent intent = new Intent(MainActivity.this, A1Activity.class);
+                startActivity(intent);
+            }else   if (i == 2) {
+                Intent intent = new Intent(MainActivity.this, PhoneGapActivity.class);
+                startActivity(intent);
+            }
+
+
+        }
     }
 }

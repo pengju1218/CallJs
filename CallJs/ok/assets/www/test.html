@@ -1,0 +1,29 @@
+<!DOCTYPE html>  
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test</title>
+
+
+<script type="text/javascript" src="cordova-2.0.0.js"></script>
+<script type="text/javascript" src="plugin.js"></script>
+
+<script type="text/javascript">
+var test01 = function(){
+
+var cb = function(data){
+                alert("1111111 : " + data.testData1 + '   and 2222222 : ' + data.testData2); 
+            }; 
+             
+window.plugins.testPlugin.test("first test data", "second test data", cb); 
+
+}
+</script>
+
+</head>
+<body>
+
+<button type="button" onclick="test01()">Click Me!</button>
+
+</body>
+</html>

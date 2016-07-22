@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=">
+    <title>first html5 page</title>
+    <!--
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/libs/modernizr-2.5.3.min.js">
+    -->
+    <script>
+function callJs(){
+alert(111111111111111);
+}
+
+             function add(){
+             window.SM.UpdateApp('http://192.168.0.1');  // 注意这里的SM.UpdateApp
+
+
+             cordova.exec(callback, function(err) {
+        callback('Nothing to echo.');
+    }, "Echo", "echo", ['参数']);
+    }
+
+
+    </script>
+</head>
+<body onload="add()">
+
+
+<div class="mui-content">
+    <div class="mui-content-padded">
+        <button id="a1" class="mui-btn mui-btn-success" onclick="javascript:SM.push('22222222222222')">点我</button>
+       <!-- <button  class="mui-btn mui-btn-success" onclick="javascript:SM.push('22222222222222')">点我2</button>-->
+        <!--
+          <button id="a2" class="mui-btn mui-btn-primary">Badge button <span class="mui-badge mui-badge-primary">2</span></button>
+          <button class="mui-btn mui-btn-success">Badge button <span class="mui-badge mui-badge-success">12</span></button>
+          <button class="mui-btn mui-btn-warning">Badge button <span class="mui-badge mui-badge-warning">121</span></button>
+          <button class="mui-btn mui-btn-danger">Badge button <span class="mui-badge mui-badge-danger">999</span></button>
+          <button class="mui-btn mui-btn-royal">Badge button <span class="mui-badge mui-badge-royal">999</span></button>-->
+
+    </div>
+</div>
+</body>
+</html>
