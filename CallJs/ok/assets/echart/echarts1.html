@@ -19,9 +19,9 @@
         //var myChart = echarts.init(document.getElementById('main')); 
 		
 	
-var date1 = ['08:50','08:54','08:58','09:02','09:06','09:10','09:14','09:18','09:22','09:26','09:30','08:50','08:54','08:58','09:02','09:06','09:10','09:14','09:18','09:22','09:26','09:30'];
+var date1 = ['08:50','08:54','08:58','09:02','09:06','09:10','09:14','09:18','09:22','09:26','09:30'];
 
-var date2=['20','30','90','120','500','10','80','20','1000','5','99','20','30','90','120','500','10','80','20','1000','5','99']
+var date2=['20','30','90','120','500','10','80','20','1000','5','99']
 
 var option2 = { 
     title: {
@@ -112,9 +112,39 @@ var option2 = {
         myChart.setOption(option2);
 
 		function setContentInfo(data1,deta2){
+		var jsonObjects = eval(data1);   //通过eval方法处理得到json对象数组
+	var date6 = eval(deta2);
 
+if(!myChart){
+          return;
+     }
 
-		}
+     //更新数据
+      var option = myChart.getOption();
+      option.series[0].data = jsonObjects;
+        option.xAxis[0].data = date6;
+      myChart.setOption(option);
+
+}
+		function add(){
+		
+if(!myChart){
+          return;
+     }
+alert(2);
+var date4=['900','300','900','1200','100','1','8','2','1000','5','99']
+var date6 = ['02:50','02:54','02:58','03:02','03:06','03:10','03:14','03:18','03:22','03:26','03:30'];
+     //更新数据
+      var option = myChart.getOption();
+      option.series[0].data = date4;
+	   option.xAxis[0].data = date6;
+	  
+	  
+      myChart.setOption(option);
+
+}
 
     </script>
+	
+	<Button onclick="add()">111</Button>
 </body>

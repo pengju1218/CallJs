@@ -2,7 +2,6 @@ package com.example.ok;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.webkit.JsResult;
@@ -10,16 +9,10 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Random;
-
 /**
  * 图表
  */
-public class A2Activity extends Activity {
+public class A3Activity extends Activity {
 	
 	WebView wv;
 	@Override
@@ -35,7 +28,7 @@ public class A2Activity extends Activity {
 		wv.getSettings().setBuiltInZoomControls(true);
 		wv.getSettings().setLoadWithOverviewMode(true);
 		wv.requestFocus();
-		wv.loadUrl("file:///android_asset/echart/echarts1.html");
+		wv.loadUrl("file:///android_asset/echart/echarts.html");
 	//	webView.getSettings().setJavaScriptEnabled(true);
 		//webView.addJavascriptInterface(new AndroidBridge(), "android"); //将那个实例化的函数类设置为”android"的js接口。
 		wv.setWebChromeClient(new WebChromeClient() {
@@ -45,7 +38,7 @@ public class A2Activity extends Activity {
 									 JsResult result) {
 
 				//Log.d(TAG, "onJsAlert(" + view + "," + url + "," + message + "," + result + ")");
-				Toast.makeText(A2Activity.this, message, Toast.LENGTH_LONG).show();
+				Toast.makeText(A3Activity.this, message, Toast.LENGTH_LONG).show();
 				result.confirm();
 				return true;
 			}
@@ -57,9 +50,9 @@ public class A2Activity extends Activity {
 	}
 
 	public void updateBtn(View view){
-		Toast.makeText(A2Activity.this,"22",Toast.LENGTH_LONG).show();
-		String date4="[\"900\",\"300\",\"900\",\"1200\",\"100\",\"1\",\"8\",\"2\",\"1000\",\"5\",\"99\"]";
-		String date6 = "[\"02:50\",\"02:54\",\"02:58\",\"03:02\",\"03:06\",\"03:10\",\"03:14\",\"03:18\",\"03:22\",\"03:26\",\"03:30\"]";
+		Toast.makeText(A3Activity.this,"22",Toast.LENGTH_LONG).show();
+		String date4="[\"1900\",\"1300\",\"2900\",\"1200\",\"1600\",\"1400\",\"1700\",\"1500\",\"1300\",\"1500\",\"1199\"]";
+		String date6 = "[\"01:50\",\"01:54\",\"01:58\",\"01:02\",\"02:06\",\"02:10\",\"02:14\",\"02:18\",\"02:22\",\"02:26\",\"02:30\"]";
 
 		wv.loadUrl("javascript:setContentInfo('"+date4+"','"+date6+"')");
 	}
