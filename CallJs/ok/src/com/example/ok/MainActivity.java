@@ -110,6 +110,9 @@ public class MainActivity extends Activity {
             }else   if (i == 2) {
                 Intent intent = new Intent(MainActivity.this, PhoneGapActivity.class);
                 startActivity(intent);
+            }else   if (i == 3) {
+                Intent intent = new Intent(MainActivity.this, A2Activity.class);
+                startActivity(intent);
             }
 
 

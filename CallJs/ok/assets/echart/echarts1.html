@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="js/echarts.js"></script>
+	    <!-- ECharts单文件引入 -->
+    <script src="js/infographic.js"></script>
+	
+    <script type="text/javascript">
+       
+        var myChart = echarts.init(document.getElementById('main'),'infographic'); 
+        
+           
+        //var myChart = echarts.init(document.getElementById('main')); 
+		
+	
+var date1 = ['08:50','08:54','08:58','09:02','09:06','09:10','09:14','09:18','09:22','09:26','09:30','08:50','08:54','08:58','09:02','09:06','09:10','09:14','09:18','09:22','09:26','09:30'];
+
+var date2=['20','30','90','120','500','10','80','20','1000','5','99','20','30','90','120','500','10','80','20','1000','5','99']
+
+var option2 = { 
+    title: {
+        left: 'center',
+        text: '大数据量面积图',
+    },
+   
+    xAxis: {
+        type: 'category',
+       boundaryGap: false,
+        data: date1,
+		axisLabel:{
+                 //X轴刻度配置
+                 interval:0 ,//0：表示全部显示不间隔；auto:表示自动根据刻度个数和宽度自动设置间隔个数
+            },
+		splitLine:{
+		show:true,
+		 lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                color: '#ccc',
+                width: 2,
+                type: 'solid'
+            }
+		}
+    },
+    yAxis: {
+      
+            type: 'value',
+            position:'right',
+   
+           
+     splitLine:{
+		show:true,
+		 lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                color: '#ccc',
+                width: 1,
+                type: 'solid'
+            }
+		}
+           
+     //   boundaryGap: [0, '100%']
+    },
+   
+
+   
+
+    series: [
+        {
+		  type:'line',
+            name:'模拟数据',
+          
+            smooth:false,
+            symbol: 'none',
+            sampling: 'average',
+            itemStyle: {
+			 
+			    
+                normal: {
+                    color: '#537400',
+					 lineStyle: {
+                    width: 1,
+					}
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(177,231,50,0.9)'
+                    }, {
+                        offset: 1,
+                        color: 'rgba(177,231,50,0.4)'
+                    }])
+                }
+            },
+            data: date2,
+        }
+    ]
+};
+
+
+
+
+
+
+
+
+        // 为echarts对象加载数据 
+        myChart.setOption(option2);
+
+		function setContentInfo(data1,deta2){
+
+
+		}
+
+    </script>
+</body>

@@ -26,43 +26,43 @@ public class A1Activity extends Activity {
 		wv = (WebView) findViewById(R.id.wv);
 		wv.getSettings().setJavaScriptEnabled(true);  
 		wv.getSettings().setUseWideViewPort(true);
-		wv.getSettings().setSupportZoom(true);
+		wv.getSettings().setSupportZoom(false);
 		// 设置是否可缩放
 		wv.getSettings().setBuiltInZoomControls(true);
 		wv.getSettings().setLoadWithOverviewMode(true);
 		wv.requestFocus();
-		wv.loadUrl("file:///android_asset/mianji_chart.html");
+		wv.loadUrl("file:///android_asset/ichartjs/mianji_chart.html");
 		
 	}
 	public void backBtn(View view){
 		this.finish();
 	}
-	
 	//模拟获取远程数据 这里可以是联网到服务端获取数据
 	private String getRemoteData(){
-		 try {  
-	            JSONObject object1 = new JSONObject();  
-	            object1.put("name", "北京");  
-	            object1.put("color", "#1f7e92");  
-	            Random random = new Random();
-	            //js中的数组类型要使用JSONArray对象
-	            JSONArray jadata= new JSONArray();  
-	            for(int i=0;i<12;i++){
-	            	jadata.put(random.nextInt(40));
-	            }
-	            object1.put("value", jadata);    
-	            JSONArray jsonArray = new JSONArray();  
-	            jsonArray.put(object1);  
-	            return jsonArray.toString();  
-	        } catch (JSONException e) {  
-	            e.printStackTrace();  
-	        }  
-	        return null;  
+		try {
+			JSONObject object1 = new JSONObject();
+			object1.put("name", "北京");
+			object1.put("color", "#1f7e92");
+			Random random = new Random();
+			//js中的数组类型要使用JSONArray对象
+			JSONArray jadata= new JSONArray();
+			for(int i=0;i<12;i++){
+				jadata.put(random.nextInt(40));
+			}
+			object1.put("value", jadata);
+			JSONArray jsonArray = new JSONArray();
+			jsonArray.put(object1);
+			return jsonArray.toString();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void updateBtn(View view){
-		 String s="十三月";
+		String s="十三月";
 		wv.loadUrl("javascript:setContentInfo('"+getRemoteData()+"','"+s+"')");
 	}
+
 
 }

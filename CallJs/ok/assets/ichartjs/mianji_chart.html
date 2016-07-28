@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <script type="text/javascript" src="ichart-1.0.min.js"></script>
+	
     <script type="text/javascript">
 		var chart;
 	    var labels=["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"];
@@ -17,15 +18,21 @@
 				       ];
 					  
 				 chart = new iChart.Area2D({
-						render : 'canvasDiv',
-						data: data,
-						turn_off_touchmove:true,
-						title : '北京2012年平均温度情况',
-						width : 800,
-						height : 400,
-					    labels:labels
-					});
-				
+				 		render : 'canvasDiv',
+				 		data : data,
+				 		turn_off_touchmove : true,
+				 		title : '北京2012年平均温度情况',
+				 		width : 800,
+				 		height : 400,
+				 		coordinate : {
+						    position:'right',
+				 			height : '90%',
+				 			background_color : '#333333',
+				 		},
+				 		labels : labels,
+				 		
+						
+				 	});
 				chart.draw();
 			});
 			

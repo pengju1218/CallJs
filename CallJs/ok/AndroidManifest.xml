@@ -51,6 +51,7 @@
 
         <activity android:name=".LocalBrowserActivity"></activity>
         <activity android:name=".A1Activity"></activity>
+        <activity android:name=".A2Activity"></activity>
         <activity
 
               android:name=".PhoneGapActivity"
