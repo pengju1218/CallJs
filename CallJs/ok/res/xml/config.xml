@@ -2,7 +2,7 @@
    <!-- xmlns="http://www.w3.org/ns/widgets"-->
 <widget id="io.cordova.helloCordova" version="2.0.0">
     <name>Hello Cordova</name>
-
+    <allow-navigation href="http://*/*" />
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
