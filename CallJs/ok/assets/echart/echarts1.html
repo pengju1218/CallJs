@@ -46,6 +46,9 @@ var option2 = {
             }
 		}
     },
+	tooltip : {  
+                    trigger: 'axis'//item  axis  
+                }, 
     yAxis: {
       
             type: 'value',
@@ -161,20 +164,38 @@ alert(2);
 	  
       myChart.setOption(option);
 	  
-	      myChart.addData([
 
-        [
-            0,        // 系列索引
-            '9000', // 新增数据
-            false,    // 新增数据是否从队列头部插入
-            false,    // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
-            '8:90'  // 坐标轴标签
-        ]
-    ]);
+
+}
+
+
+
+var date40=['0','0','0','0','0','0','0','0','0','0','0','0']
+var date60 = ['80:40','80:40','80:40','80:40','80:40','80:40'];
+    
+
+		function setContentInfo2(data1,deta2){
+		date40.push(data1);
+		
+				date40.shift();
+		date60.push(deta2);
+		
+				date60.shift();
+
+if(!myChart){
+          return;
+     }
+
+     //更新数据
+      var option = myChart.getOption();
+      option.series[0].data = date40;
+        option.xAxis[0].data = date60;
+      myChart.setOption(option);
 
 }
 
     </script>
 	
 	<Button onclick="add()">111</Button>
+	<Button onclick="setContentInfo2('6000','9:50')">22222</Button>
 </body>

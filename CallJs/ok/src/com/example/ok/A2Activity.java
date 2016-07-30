@@ -61,7 +61,9 @@ public class A2Activity extends Activity {
 		String date4="[\"900\",\"300\",\"900\",\"1200\",\"100\",\"1\",\"8\",\"2\",\"1000\",\"5\",\"99\"]";
 		String date6 = "[\"02:50\",\"02:54\",\"02:58\",\"03:02\",\"03:06\",\"03:10\",\"03:14\",\"03:18\",\"03:22\",\"03:26\",\"03:30\"]";
 
-		wv.loadUrl("javascript:setContentInfo('"+date4+"','"+date6+"')");
+		//wv.loadUrl("javascript:setContentInfo('"+date4+"','"+date6+"')");
+
+		wv.loadUrl("javascript:setContentInfo2('5000','9:00')");
 	}
 
 }
