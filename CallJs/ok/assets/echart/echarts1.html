@@ -85,6 +85,15 @@ var option2 = {
 					}
                 }
             },
+			markLine:{
+			
+			data : 
+   
+        {name: 'oo', value: '900'}
+     
+    
+
+			},
             areaStyle: {
                 normal: {
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
@@ -103,7 +112,9 @@ var option2 = {
 
 
 
-
+var date4=['900','300','900','1200','100','1','8','2','1000','5','99']
+var date6 = ['02:50','02:54','02:58','03:02','03:06','03:10','03:14','03:18','03:22','03:26','03:30'];
+    
 
 
 
@@ -129,18 +140,37 @@ if(!myChart){
 		function add(){
 		
 if(!myChart){
+
           return;
      }
 alert(2);
-var date4=['900','300','900','1200','100','1','8','2','1000','5','99']
-var date6 = ['02:50','02:54','02:58','03:02','03:06','03:10','03:14','03:18','03:22','03:26','03:30'];
-     //更新数据
+
+	   //更新数据
       var option = myChart.getOption();
+	 
+	  date4.push('300');
+	  date6.push('10:00');
+	  
+	  
+	 
       option.series[0].data = date4;
 	   option.xAxis[0].data = date6;
+	   
+	  
 	  
 	  
       myChart.setOption(option);
+	  
+	      myChart.addData([
+
+        [
+            0,        // 系列索引
+            '9000', // 新增数据
+            false,    // 新增数据是否从队列头部插入
+            false,    // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+            '8:90'  // 坐标轴标签
+        ]
+    ]);
 
 }
 
