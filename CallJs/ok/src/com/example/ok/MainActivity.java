@@ -116,6 +116,9 @@ public class MainActivity extends Activity {
             }else   if (i == 4) {
                 Intent intent = new Intent(MainActivity.this, A3Activity.class);
                 startActivity(intent);
+            }else   if (i == 5) {
+                Intent intent = new Intent(MainActivity.this, A4Activity.class);
+                startActivity(intent);
             }
 
 

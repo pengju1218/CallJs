@@ -38,6 +38,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:sharedUserId="android.uid.system"
         android:theme="@style/AppTheme">
         <activity
             android:name="com.example.ok.MainActivity"
@@ -47,16 +48,27 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:pathPrefix="/taoge/open"
+                    android:scheme="xttblog" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".LocalBrowserActivity"></activity>
         <activity android:name=".A1Activity"></activity>
         <activity android:name=".A2Activity"></activity>
         <activity android:name=".A3Activity"></activity>
+        <activity android:name=".A4Activity"></activity>
         <activity
 
-              android:name=".PhoneGapActivity"
-              android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"></activity>
+            android:name=".PhoneGapActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"></activity>
     </application>
 
 </manifest>
