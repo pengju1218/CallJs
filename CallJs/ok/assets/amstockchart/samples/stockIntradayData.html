@@ -157,6 +157,36 @@
 
 				chart.write('chartdiv');
 			}
+			
+			
+			function setContentInfo(str){
+			 alert(str);
+			
+			  var json= eval( "(" + str + ")" );
+
+			 alert(json);
+			 
+			chartData.push(json);
+					
+			// DATASETS //////////////////////////////////////////
+				var dataSet = new AmCharts.DataSet();
+				dataSet.color = "#b0de09";
+				dataSet.fieldMappings = [{
+					fromField: "value",
+					toField: "value"
+				}, {
+					fromField: "volume",
+					toField: "volume"
+				}];
+				dataSet.dataProvider = chartData;
+				dataSet.categoryField = "date";
+
+				// set data sets to the chart
+				chart.dataSets = [dataSet];
+	
+			
+				chart.write('chartdiv');
+			}
 
 
 		</script>

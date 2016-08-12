@@ -1,0 +1,387 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Highstock Examples</title>
+	</head>
+	<body>
+		<script id="jquery_183" type="text/javascript" class="library" src="js/jquery-1.8.0.min.js"></script>
+<script src="http://code.highcharts.com/stock/highstock.src.js"></script>
+<script src="http://sandbox.runjs.cn/uploads/rs/254/bsgu2efy/oxymoronic-candlesticks.js"></script>
+<script src="http://sandbox.runjs.cn/uploads/rs/254/bsgu2efy/technical-indicators.js"></script>
+<script src="http://sandbox.runjs.cn/uploads/rs/254/bsgu2efy/dark-unica.js"></script>
+<script src="http://sandbox.runjs.cn/uploads/rs/254/bsgu2efy/aapl-ohlcv.js"></script>
+<script>
+Highcharts.setOptions({
+            global: {
+                useUTC: false
+            },
+            lang: {
+                downloadJPEG: "下载JPGE格式",
+                contextButtonTitle: "hello",
+                rangeSelectorFrom: "日期:",
+                rangeSelectorTo: "至",
+                rangeSelectorZoom: "范围",
+                loading: "加载中...",
+                shortMonths: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                weekdays: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
+            }
+        });
+        $(function () {
+            //$.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function(data) {
+
+            //数据
+            //var aaplOhlcv（在files/aapl-ohlcv.js文件中）
+
+            //x轴数据
+            var xData = [];
+            //收盘价
+            var closeData = [];
+            //成交量
+            var volumeData = [];
+            //
+            var applData = [];
+            //
+            var ma7Data = [];
+            //
+            var ma30Data = [];
+            var colors = ["#3A1", "#D20", "rgba(255, 255, 255, 0)"];
+            //
+            var lastTime = null;
+            for (var i = 0, length = aaplOhlcv.length; i < length; i++) {
+                var time = aaplOhlcv[i][0], open = aaplOhlcv[i][1], high = aaplOhlcv[i][2],
+                    low = aaplOhlcv[i][3], close = aaplOhlcv[i][4], volume = aaplOhlcv[i][5],
+                    change = 0, changePercent = 0, ma7 = null, ma30 = null;
+
+                aaplOhlcv[i - 1]
+                    ? (change = close - aaplOhlcv[i - 1][4],
+                        0 === change
+                            ? (change = 0, changePercent = 0)
+                            : changePercent = change / aaplOhlcv[i - 1][4] * 100)
+                    : (change = close - open, changePercent = change / open * 100);
+
+                ma7Data.push(close);
+                if (7 === ma7Data.length) {
+                    ma7 = arrayAvg(ma7Data);
+                    ma7Data.splice(0, 1);
+                }
+
+                ma30Data.push(close);
+                if (30 === ma30Data.length) {
+                    ma30 = arrayAvg(ma30Data);
+                    ma30Data.splice(0, 1);
+                }
+
+                xData.push(time);
+                closeData.push(close);
+                volumeData.push({
+                    x: time,
+                    y: volume,
+                    color: open > close ? colors[2] : colors[1],
+                    borderColor: open > close ? colors[0] : colors[1]
+                });
+                //volumeData.push([aaplOhlcv[i][0], aaplOhlcv[i][5]]);
+                applData.push({
+                    x: time,
+                    y: open,
+                    open: open,
+                    high: high,
+                    low: low,
+                    close: close,
+                    change: change,
+                    changePercent: changePercent,
+                    volume: volume,
+                    ma7: ma7,
+                    ma30: ma30,
+                    kline: true
+                });
+                lastTime = time;
+            }
+
+            $('#container').highcharts('StockChart', {
+                chart: {
+                    marginTop: 30,
+                    events: {
+                        load: function () {
+                            // set up the updating of the chart each second
+                            var series = this.series[0];
+                            setInterval(function () {
+                                //[1147651200000, 67.37, 68.38, 67.12, 67.79, 18921051]
+                                lastTime += 24 * 60 * 60 * 1000;
+                                var time = lastTime,//(new Date()).getTime(),
+                                    open = Math.random() * 100,
+                                    high = Math.random() * 100,
+                                    low = Math.random() * 100,
+                                    close = Math.random() * 100,
+                                    volume = Math.random() * 100000000;
+                                series.addPoint([time, open, high, low, close, volume], true, true);
+                            }, 1000);
+                        }
+                    }
+                },
+                title: {
+                    text: ''
+                },
+                subtitle: {
+                    text: ''
+                },
+                tooltip: {
+                    crosshairs: false,
+                    shared: true,
+                    useHTML: true,
+                    shadow: false,
+                    borderColor: "rgba(255, 255, 255, 0)",
+                    backgroundColor: "rgba(255, 255, 255, 0)",
+                    valueDecimals: 2,
+                    positioner: function () {
+                        return { x: 0, y: -5 }
+                    },
+                    formatter: function () {
+                        var tipMsg, data = this.points;
+                        if (data && data.length) {
+                            var e = data[0].point,
+                                open = Highcharts.numberFormat(e.open),
+                                high = Highcharts.numberFormat(e.high),
+                                low = Highcharts.numberFormat(e.low),
+                                close = Highcharts.numberFormat(e.close),
+                                volume = Highcharts.numberFormat(e.volume),
+                                change = Highcharts.numberFormat(e.change),
+                                changePercent = Highcharts.numberFormat(e.changePercent) + "%",
+                                ma7 = Highcharts.numberFormat(e.ma7),
+                                ma30 = Highcharts.numberFormat(e.ma30);
+                            tipMsg = '<b style="line-height: 25px;">' + Highcharts.dateFormat("%Y-%m-%d  %A", this.x) + " </b>",
+                                tipMsg += '开盘价：<span style="line-height: 25px;">' + open + " </span>",
+                                tipMsg += '最高价：<span style="line-height: 25px;">' + high + " </span>",
+                                tipMsg += '最低价：<span style="line-height: 25px;">' + low + " </span>",
+                                tipMsg += '收盘价：<span style="line-height: 25px;">' + close + " </span>",
+                                0 > change
+                                    ? (tipMsg += '涨跌额：<span style="color: #3A1;line-height: 25px;">' + change + " </span>",
+                                        tipMsg += '涨跌幅：<span style="color: #3A1;line-height: 25px;">' + changePercent + " </span>")
+                                    : (tipMsg += '涨跌额：<span style="color: #D20;line-height: 25px;">' + change + " </span>",
+                                        tipMsg += '涨跌幅：<span style="color: #D20;line-height: 25px;">' + changePercent + " </span>"),
+                                tipMsg += '成交量：<span style="line-height: 25px;">' + volume + " </span>",
+                                tipMsg += 'MA7：<span style="line-height: 25px; color: #ffd800">' + ma7 + " </span>",
+                                tipMsg += 'MA30：<span style="line-height: 25px;">' + ma30 + " </span>";
+                        }
+                        return tipMsg;
+                    }
+                },
+                rangeSelector: {
+                    selected: 1,
+                    inputEnabled: false
+                },
+                legend: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                navigator: {
+                    enabled: false
+                },
+                scrollbar: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        lineWidth: 1,
+                        turboThreshold: Number.MAX_VALUE
+                    },
+                    marker: {
+                        enabled: false
+                    },
+                    line: {
+                        states: {
+                            hover: {
+                                lineWidth: 1.2
+                            }
+                        }
+                    },
+                    column: {
+                        borderWidth: 1,
+                        state: {
+                            hover: { enabled: false }
+                        },
+                        enableMouseTracking: false,
+                        turboThreshold: Number.MAX_VALUE,
+                        dataGrouping: { enabled: false }
+                    },
+                    candlestick: {
+                        oxymoronic: true,
+                        color: "#3A1",
+                        upColor: "#D20",
+                        lineColor: "#3A1",
+                        upLineColor: "#D20",
+                        dataGrouping: { enabled: false }
+                    }
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickWidth: 1,
+                    showLastLabel: true,
+                    labels: {
+                        formatter: function () {
+                            return Highcharts.dateFormat("20%y-%m-%d", this.value);//Highcharts.dateFormat("%H:%M", this.value);
+                        }
+                    },
+                    crosshair: {
+                        label: {
+                            enabled: true,
+                            padding: 3,
+                            borderWidth: 1,
+                            borderColor: "#F0F0F0",
+                            backgroundColor: '#000000',
+                            style: { "color": "#F0F0F0" },
+                            formatter: function (e) {
+                                return Highcharts.dateFormat("20%y-%m-%d %H:%M", e);
+                            }
+                        }
+                    }
+                },
+                yAxis: [
+                    {
+                        //opposite: true,
+                        offset: 0,
+                        labels: { align: "left" },
+                        height: "70%",
+                        lineColor: "#f00",
+                        gridLineDashStyle: "Dot",
+                        showLastLabel: true,
+                        crosshair: {
+                            label: {
+                                enabled: true,
+                                padding: 3,
+                                borderWidth: 1,
+                                borderColor: "#F0F0F0",
+                                backgroundColor: '#000000',
+                                style: { "color": "#F0F0F0" },
+                                formatter: function (e) {
+                                    return Highcharts.numberFormat(e, 2);
+                                }
+                            }
+                        }
+                    },
+                    {
+                        //opposite: true,
+                        offset: 0,
+                        labels: { align: "left" },
+                        top: "72%",
+                        height: "25%",
+                        lineColor: "#f00",
+                        gridLineDashStyle: "Dot",
+                        //gridLineColor: "#f6f6f6",
+                        //showLastLabel: true,
+                        tickPixelInterval: 30
+                        //, crosshair: {
+                        //    label: {
+                        //        enabled: true,
+                        //        padding: 3,
+                        //        borderWidth: 1,
+                        //        borderColor: "#F0F0F0",
+                        //        backgroundColor: '#000000',
+                        //        style: { "color": "#F0F0F0" }
+                        //    }
+                        //}
+                    }
+                ],
+                series: [
+                    {
+                        name: 'AAPL Stock Price',
+                        type: 'candlestick',
+                        id: 'applData',
+                        data: applData
+                    },
+                    {
+                        name: 'MA7',
+                        type: 'line',
+                        color: "#ffd800",
+                        enableMouseTracking: false,
+                        data: SMA(xData, closeData, 7)
+                    },
+                    {
+                        name: 'MA30',
+                        type: 'line',
+                        color: "#fff",
+                        enableMouseTracking: false,
+                        data: SMA(xData, closeData, 30)
+                    },
+                    {
+                        yAxis: 1,
+                        name: "成交量",
+                        type: "column",
+                        id: 'volumeData',
+                        data: volumeData
+                    },
+                    {
+                        yAxis: 1,
+                        name: '5-day SMA',
+                        linkedTo: 'volumeData',
+                        showInLegend: true,
+                        type: 'trendline',
+                        color: "#fff",
+                        enableMouseTracking: false,
+                        algorithm: 'SMA',
+                        periods: 5
+                    },
+                    {
+                        yAxis: 1,
+                        name: '10-day SMA',
+                        linkedTo: 'volumeData',
+                        showInLegend: true,
+                        type: 'trendline',
+                        color: "#ffd800",
+                        enableMouseTracking: false,
+                        algorithm: 'SMA',
+                        periods: 10
+                    }
+                ]
+            });
+            //});
+        });
+        function arrayAvg(arr) {
+            var sum = 0,
+                arrLength = arr.length,
+                i = arrLength;
+
+            while (i--) {
+                sum = sum + arr[i];
+            }
+
+            return (sum / arrLength);
+        }
+        function SMA(xData, yData, periods) {
+            var periodArr = [],
+                smLine = [],
+                length = yData.length,
+                pointStart = xData[0];
+
+            // Loop through the entire array.
+            for (var i = 0; i < length; i++) {
+
+                // add points to the array.
+                periodArr.push(yData[i]);
+
+                // 1: Check if array is "filled" else create null point in line.
+                // 2: Calculate average.
+                // 3: Remove first value.
+                if (periods === periodArr.length) {
+
+                    smLine.push([xData[i], arrayAvg(periodArr)]);
+                    periodArr.splice(0, 1);
+
+                } else {
+                    smLine.push([xData[i], null]);
+                }
+            }
+            return smLine;
+        }
+</script>
+
+
+<div >
+     <!-- highchart start -->
+     <div id="container" style="width:100%; height: 100%; margin: 0 auto"></div>
+     <!-- highchart end -->
+</div>
+	</body>
+</html>

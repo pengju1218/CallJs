@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+		<script type="text/javascript" src="script/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="script/hidpi-canvas.js" ></script>
+		<script type="text/javascript" src="script/moment.js"></script>
+		<script type="text/javascript" src="data.js"></script>
+		<script type="text/javascript" src="script/vkchart.js" ></script>
+	</head>
+
+	<body style="margin: 0 2px;background:#362A38;">
+		<!--<div id="tip" style="text-align: center;line-height: 50px;color: wheat;">请在手机上查看</div>-->
+		<div id="vkContent1" style="width: 100%;height: 300px; position: relative;border: 1px solid tomato; ">
+		</div>
+		<!--<div id="vkContent2" style="width: 80%;height: 0px; position: relative;border: 1px solid tomato; ">
+		</div>-->
+		<script type="text/javascript">
+			//画分时图
+			var chart1 = new VKChart('vkContent1');
+//			chart.options.dateTimeType='date';
+			var data = getQuote();
+			data.items = data.items.reverse();
+			chart1.paint(data,VKChart.Type.mins);
+			
+			//画K线图
+			//var chart2 = new VKChart('vkContent2');
+//			chart.options.dateTimeType='date';
+			//var data = getQuote();
+			//data.items = data.items.reverse();
+			//chart2.paint(data,VKChart.Type.kline);
+			
+			function add(){
+			var obj= {
+			"barId": 24469282,
+			"symbol": "XAGRMB",
+			date: 1426571940000,
+			open: 3397.87,
+			close: 3397.22,
+			low: 3397.2,
+			high: 3397.93,
+			volume: 45.342237189435856,
+			"barPeriodType": "M1"
+		};
+		//alert(1111111111111);
+			//data.items = data.items.reverse();
+			data.items.push(obj);
+			data.items.shift();
+				chart1.paint(data,VKChart.Type.mins);
+			alert(1111111111111);
+			}
+			
+		</script>
+		
+		<Button onclick="add()">111111111111111</Button>
+
+	</body>
+
+</html>
