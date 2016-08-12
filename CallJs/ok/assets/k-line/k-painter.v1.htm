@@ -232,8 +232,8 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
                     controllerCanvas.width = priceRegion.width;
                     controllerCanvas.height = priceRegion.height;
                     var canvasPosition = getPageCoord(me.canvas);
-                    controllerCanvas.style.left = canvasPosition.x + priceRegion.x +20+ 'px';
-                    controllerCanvas.style.top = canvasPosition.y + priceRegion.y+90 + 'px';
+                    controllerCanvas.style.left = canvasPosition.x + priceRegion.x + 'px';
+                    controllerCanvas.style.top = canvasPosition.y + priceRegion.y + 'px';
                     controllerCanvas.style.position = 'absolute';
                     controllerCanvas.style.zIndex = (me.canvas.style.zIndex ? me.canvas.style.zIndex : 1) + 1;
                     controllerCanvas.style.display = 'block';
@@ -677,14 +677,7 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
                 //主图区域的边距
                 chartMargin:{left:45.5,top:20.5,right:20.5},
                 region: { x: 45.5, y: 20.5, width: initialWidth - 45.5 - 20.5, height: 250 },
-                barWidth: 5, 
-				spaceWidth: 2,
-				horizontalLineCount: 7,
-				verticalLineCount: 7, 
-				lineStyle: 'solid',
-				borderColor: 'gray',
-				splitLineColor: '#eeeeee', 
-				lineWidth: 1,
+                barWidth: 5, spaceWidth: 2, horizontalLineCount: 7, verticalLineCount: 7, lineStyle: 'solid', borderColor: 'gray', splitLineColor: '#eeeeee', lineWidth: 1,
                 MAs: [
                     { color: 'rgb(255,70,251)', daysCount: 5 },
                     { color: 'rgb(227,150,34)', daysCount: 10 },
@@ -728,12 +721,8 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
                         fontHeight: 8,
                         textBaseline: 'top'
                     }
-                },
-                controller:{
-	
-                    bar: { width: 20, height: 35, borderColor: 'black', fillColor: 'lightgray' },
-                    minBarDistance: 20
                 }
+               
                
             };
            
@@ -742,7 +731,6 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
                 if(canvas.width != initialWidth) canvas.width = initialWidth;
                 var kl = new kLine(kOptions);
                 var data = getKLData();
-				alert(data);
                 painter = new Painter('canvasKL', kl, data);
             }
             painter.dataRanges = ranges;
@@ -754,7 +742,7 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
     
 </head>
 <body onload="drawKL()" style="padding:0;margin:2px">
-    <canvas id="canvasKL"  height="500" style="width:100%;    z-index: 2; border: 1px solid #69c">
+    <canvas id="canvasKL" height="400" style="width:100%;z-index: 2; border: 1px solid #69c">
         <p>hey,您的浏览器不支持html5，换个浏览器吧，比如google chrome，firefox</p>
     </canvas>
     <div id="debug"></div>
@@ -764,6 +752,10 @@ blog:http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
     <style>
     pre{padding: 60px 0 0 30px;color: gray;font-size: .8em;line-height: 20px;}
     </style>
- 
+    <p><a href="./index.html">返回列表页</a></p>
+    <pre>
+Author:yukaizhao http://www.cnblogs.com/yukaizhao/ http://weibo.com/yukaizhao/
+参与项目或技术交流：<a href="mailto:yukaizhao@gmail.com">yukaizhao@gmail.com</a>
+    </pre>
 </body>
 </html>
