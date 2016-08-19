@@ -16,7 +16,7 @@
 	 
     </style>
   </head>
-  <body onload="contact.loch()">
+  <body >
     <div  id="container"></div>
     <script type="text/javascript" src="flotr2.js"></script>
     <script type="text/javascript">
@@ -173,7 +173,13 @@
     </script>
 
     <script type="text/javascript">
-
+ var bj = [[1, -9], [2, 1], [3, 12], [4, 20],[5, 26], [6, 30], [7, 32], [8, 29],[9, 22], [10, 12], [11, 0], [12, -6]],// First data series
+            sz = [[1, 15], [2, 16], [3, 19], [4, 22],[5, 26], [6, 27], [7, 28], [8, 28],[9, 27], [10, 25], [11, 20], [12, 16]]; //Second data series
+         var data = [
+            { data : bj, label :'买单' ,lines : { fill : true }},
+            { data : sz, label :'卖单' ,lines : { fill : true }}
+         ];
+         drawChart(data);
 
 
 function setContentInfo(bj,sz){
