@@ -67,6 +67,7 @@
         <activity android:name=".A4Activity"></activity>
         <activity android:name=".A5Activity"></activity>
         <activity android:name=".A6Activity"></activity>
+        <activity android:name=".A7Activity"></activity>
         <activity
 
             android:name=".PhoneGapActivity"

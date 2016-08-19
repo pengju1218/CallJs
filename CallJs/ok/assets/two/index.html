@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--禁止浏览器缩放-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type" />
+    <!--清除浏览器缓存-->
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+    <!--iPhone 手机上设置手机号码不被显示为拨号链接）-->
+    <meta content="telephone=no, address=no" name="format-detection" />
+    <!--IOS私有属性，可以添加到主屏幕-->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!--屏幕顶部条的颜色-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+ 
+    <title>手机webApp</title>
+    <!-- 重置样式 -->
+    <link type="text/css" href="css/reset.css" rel="stylesheet" />
+    <!-- 主样式 -->
+    <link type="text/css" href="css/common.css" rel="stylesheet" />
+    <link type="text/css" href="css/logic.css" rel="stylesheet" />
+    <!-- Jquery库 -->
+   <!-- <script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script>-->
+    <!-- 手机触摸 -->
+   <!-- <script type="text/javascript" src="scripts/hammer.js"></script>-->
+    <!--让IE8，IE9，支持Html5和Css3-->
+    <!--[if lte IE 8]>
+        <script src="scripts/selectivizr.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+        <script src="scripts/css3-mediaqueries.js"></script>
+        <script src="scripts/html5shiv.js"></script>
+    <![endif]-->
+	
+	<script type="text/javascript">
+	
+	//alert('11111111111');
+	 function getValueById(gic){
+	 	 //alert(gic)
+	
+	  var t=document.getElementById(gic)
+	  window.contact.jsMethod(gic,t.value);//用接口stub, 通过调用内部类中的方法jsMethod给java传回
+	 }
+	
+	</script>
+	
+</head>
+<body>
+
+<input id="aa" type="text" value="1111111111" onclick="getValueById(this.id)" ></input>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
